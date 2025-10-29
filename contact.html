@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#24273A" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="prefetch" href="./projects.html" />
+    <link rel="prefetch" href="./index.html" />
+    <title>Duc's contacts</title>
+    <meta name="description" content="My contact me page" />
+    <style>
+      /* Catppuccin Macchiato palette */
+      :root {
+        --ctp-rosewater: #f4dbd6;
+        --ctp-flamingo: #f0c6c6;
+        --ctp-pink: #f5bde6;
+        --ctp-mauve: #c6a0f6;
+        --ctp-red: #ed8796;
+        --ctp-maroon: #ee99a0;
+        --ctp-peach: #f5a97f;
+        --ctp-yellow: #eed49f;
+        --ctp-green: #a6da95;
+        --ctp-teal: #8bd5ca;
+        --ctp-sky: #91d7e3;
+        --ctp-sapphire: #7dc4e4;
+        --ctp-blue: #8aadf4;
+        --ctp-lavender: #b7bdf8;
+        --ctp-text: #cad3f5;
+        --ctp-subtext1: #b8c0e0;
+        --ctp-subtext0: #a5adcb;
+        --ctp-overlay2: #939ab7;
+        --ctp-overlay1: #8087a2;
+        --ctp-overlay0: #6e738d;
+        --ctp-surface2: #5b6078;
+        --ctp-surface1: #494d64;
+        --ctp-surface0: #363a4f;
+        --ctp-base: #24273a;
+        --ctp-mantle: #1e2030;
+        --ctp-crust: #181926;
+
+        /* Theme tokens */
+        --bg: var(--ctp-base);
+        --panel: var(--ctp-mantle);
+        --text: var(--ctp-text);
+        --muted: var(--ctp-overlay1);
+        --accent: var(--ctp-sapphire);
+        --accent-2: var(--ctp-teal);
+        --ring: color-mix(in oklab, var(--accent) 60%, white);
+        --shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        --shadow-lg: 0 16px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Base styles */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font:
+          16px/1.6 ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Ubuntu,
+          Cantarell,
+          "Noto Sans",
+          "Helvetica Neue",
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+        letter-spacing: 0.2px;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      /* Header / Nav */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0;
+        position: sticky;
+        top: 0;
+        background: color-mix(in oklab, var(--bg) 85%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--ctp-surface1);
+        z-index: 10;
+      }
+      .brand {
+        font-weight: 700;
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--muted);
+        padding: 8px 10px;
+        border-radius: 10px;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          outline-color 0.2s ease;
+      }
+      .nav a:hover,
+      .nav a[aria-current="page"] {
+        color: var(--text);
+        background: var(--panel);
+        outline: 1px solid var(--ctp-surface1);
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 28px;
+        align-items: center;
+        padding: 40px 0;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.15;
+        letter-spacing: 0.3px;
+      }
+      .hero p.lead {
+        font-size: clamp(16px, 2vw, 18px);
+        color: var(--subtext1);
+        margin-top: 12px;
+      }
+      .cta {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* UI atoms */
+      .button {
+        --b: var(--accent);
+        display: inline-block;
+        padding: 12px 16px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        background: var(--b);
+        border: 1px solid color-mix(in oklab, var(--b) 60%, black);
+        box-shadow: var(--shadow);
+        will-change: transform, box-shadow;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.25s ease,
+          background 0.25s ease,
+          border-color 0.25s ease;
+      }
+      .button:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+      .button:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow);
+      }
+      .button.secondary {
+        --b: var(--panel);
+        color: var(--text);
+      }
+      .button.secondary:hover {
+        background: color-mix(in oklab, var(--panel) 85%, var(--accent));
+        border-color: color-mix(in oklab, var(--panel) 60%, var(--accent));
+      }
+      .button:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+      }
+
+      .card {
+        background: color-mix(in oklab, var(--panel) 80%, transparent);
+        border: 1px solid var(--ctp-surface1);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .section {
+        padding: 28px 0;
+      }
+      .section h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+        letter-spacing: 0.2px;
+      }
+      kbd {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+          monospace;
+        padding: 0.15em 0.4em;
+        border-radius: 6px;
+        background: var(--ctp-surface0);
+        border: 1px solid var(--ctp-surface1);
+      }
+
+      /* Content link styling (not buttons or nav) */
+      main a:not(.button) {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+        border-radius: 8px;
+        padding: 0 2px;
+        outline-offset: 2px;
+        transition:
+          background 0.15s ease,
+          outline-color 0.15s ease;
+      }
+      main a:not(.button):hover {
+        background: color-mix(in oklab, var(--accent) 20%, transparent);
+        outline: 1px solid var(--ring);
+      }
+      main a:not(.button):focus-visible {
+        outline: 2px solid var(--ring);
+      }
+
+      /* Subtle hover animations for project cards */
+      #projects .card {
+        will-change: transform, box-shadow, border-color, background;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.25s ease,
+          border-color 0.2s ease,
+          background 0.25s ease;
+      }
+      #projects .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: color-mix(
+          in oklab,
+          var(--accent) 40%,
+          var(--ctp-surface1)
+        );
+        background: color-mix(in oklab, var(--panel) 85%, var(--accent));
+      }
+
+      /* Page transition (fade-out/in content only) */
+      .page {
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+      body:not(.is-loading) .page {
+        opacity: 1;
+        transform: none;
+      }
+      .is-exiting .page {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      .is-exiting .header {
+        background: var(--panel);
+      }
+
+      /* View Transitions API (Chrome/Edge progressive enhancement) */
+      @supports (view-transition-name: root) {
+        :root {
+          view-transition-name: root;
+        }
+        ::view-transition-old(root) {
+          animation: vt-fade-out 0.3s ease both;
+        }
+        ::view-transition-new(root) {
+          animation: vt-fade-in 0.3s ease both;
+        }
+        @keyframes vt-fade-out {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+        @keyframes vt-fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      }
+
+      /* Respect reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+        .page {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 880px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .footer {
+        /* margin: 48px 0 12px; */
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body class="is-loading">
+    <header class="header container">
+      <div class="brand">Nguyen Thien Duc</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="./index.html">Home</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <main class="container page">
+      <section class="section">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:ntduc@pm.me">ntduc@pm.me</a></p>
+        <p>
+          Github: <a href="https://github.com/thienduc3112">ThienDuc3112</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <small
+        >© 2025 Nguyen Thien Duc - Built with (mostly) plain HTML + Catppuccin
+        Macchiato.</small
+      >
+    </footer>
+
+    <script>
+      (function () {
+        var DURATION = 300;
+        function isInternal(href) {
+          try {
+            var u = new URL(href, location.href);
+            return u.origin === location.origin;
+          } catch (e) {
+            return false;
+          }
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+          requestAnimationFrame(function () {
+            document.body.classList.remove("is-loading");
+          });
+        });
+        window.addEventListener("pageshow", function (e) {
+          if (e.persisted) {
+            document.body.classList.remove("is-exiting");
+            document.body.classList.remove("is-loading");
+          }
+        });
+        document.addEventListener(
+          "click",
+          function (e) {
+            var a = e.target.closest("a[href]");
+            if (!a) return;
+            if (
+              a.hasAttribute("download") ||
+              a.target === "_blank" ||
+              e.metaKey ||
+              e.ctrlKey ||
+              e.shiftKey ||
+              e.altKey
+            )
+              return;
+            var u;
+            try {
+              u = new URL(a.href, location.href);
+            } catch (_) {
+              return;
+            }
+            var sameOrigin = u.origin === location.origin;
+            var isHashOnly = u.pathname === location.pathname && !!u.hash; // in-page anchors
+            if (!sameOrigin || isHashOnly) return; // let external and in-page anchors behave normally
+            e.preventDefault();
+
+            if (document.startViewTransition) {
+              document.startViewTransition(function () {
+                window.location.href = a.href;
+              });
+              return;
+            }
+            document.body.classList.add("is-exiting");
+            void document.body.offsetWidth; // reflow to apply class before navigating
+            setTimeout(function () {
+              window.location.href = a.href;
+            }, DURATION);
+          },
+          { capture: true },
+        );
+      })();
+    </script>
+    <noscript
+      ><style>
+        .page {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style></noscript
+    >
+  </body>
+</html>
