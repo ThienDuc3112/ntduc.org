@@ -61,6 +61,7 @@
       html,
       body {
         height: 100%;
+        scrollbar-gutter: stable;
       }
       body {
         margin: 0;
@@ -258,6 +259,32 @@
         background: color-mix(in oklab, var(--panel) 85%, var(--accent));
       }
 
+      #proj-grid {
+        opacity: 1;
+        transform: none;
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      /* fade OUT + move DOWN */
+      #proj-grid.anim-out {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      /* starting pose for fade IN + move UP */
+      #proj-grid.anim-in {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #proj-grid {
+          transition: none !important;
+        }
+      }
+
       /* Page transition (fade-out/in content only) */
       .page {
         opacity: 0;
@@ -345,12 +372,328 @@
     </header>
 
     <main class="container page">
-      <h2>Projects</h2>
-      <p>A bit empty here...</p>
-      <p>
-        Consider harass the maker of this site (me) to update this if you ever
-        come across this
-      </p>
+      <section id="projects" class="section">
+        <h1 style="margin-top: 0">Personal projects</h1>
+        <p class="lead">
+          A selection of recent and notable work. Use the quick filters or
+          search to narrow down.
+        </p>
+
+        <div class="card" style="margin: 16px 0">
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <strong>Filter:</strong>
+            <button
+              class="button secondary"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              All
+            </button>
+            <button class="button secondary" data-filter="backend">
+              Backend
+            </button>
+            <button class="button secondary" data-filter="systems">
+              Systems
+            </button>
+            <button class="button secondary" data-filter="ml">ML</button>
+            <button class="button secondary" data-filter="frontend">
+              Frontend
+            </button>
+            <label
+              style="
+                margin-left: auto;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+              "
+            >
+              <span class="muted" style="color: var(--muted)">Search</span>
+              <input
+                id="proj-search"
+                type="search"
+                placeholder="type to filter..."
+                style="
+                  background: var(--panel);
+                  color: var(--text);
+                  border: 1px solid var(--ctp-surface1);
+                  border-radius: 12px;
+                  padding: 8px 10px;
+                  outline-offset: 2px;
+                  min-width: 220px;
+                "
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="grid" id="proj-grid">
+          <!-- Noncord -->
+          <article
+            class="card project"
+            data-tags="backend systems go realtime ddd cqrs outbox websocket postgres"
+          >
+            <h3 style="margin-top: 0" id="noncord">Noncord</h3>
+            <p>
+              Discord-like real-time chat platform in Go with DDD aggregates
+              (Server, Channel, Role), CQRS, outbox, and WebSocket gateway.
+            </p>
+            <p>
+              <kbd>Go</kbd> <kbd>Postgres</kbd> <kbd>RabbitMQ/Kafka</kbd>
+              <kbd>WebSocket</kbd> <kbd>CQRS</kbd> <kbd>Outbox</kbd>
+            </p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/Noncord.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- AnyLeaderboards -->
+          <article
+            class="card project"
+            data-tags="backend go web postgres sqlc ddd verification"
+          >
+            <h3 style="margin-top: 0" id="anyleaderboards">AnyLeaderboards</h3>
+            <p>
+              Dynamic leaderboard maker with custom fields, per-leaderboard
+              permissions, verifiers, and favorites.
+            </p>
+            <p>
+              <kbd>Go</kbd> <kbd>sqlc</kbd> <kbd>Postgres</kbd> <kbd>DDD</kbd>
+              <kbd>REST</kbd>
+            </p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/AnyLeaderboard.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- Exchange Matching Engine -->
+          <article
+            class="card project"
+            data-tags="systems c++ concurrency backend trading orderbook"
+          >
+            <h3 style="margin-top: 0" id="matching-engine">
+              Exchange Matching Engine
+            </h3>
+            <p>
+              Price-time priority order book with concurrent matching, level
+              queues, and invariant checks.
+            </p>
+            <p>
+              <kbd>C++</kbd>
+              <kbd>Go</kbd>
+              <kbd>Concurrency</kbd>
+              <kbd>Order Book</kbd>
+            </p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/Exchange-matching-engine.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- Multi-agent Warehouse RL -->
+          <article
+            class="card project"
+            data-tags="ml rl python pytorch multi-agent ppo research"
+          >
+            <h3 style="margin-top: 0" id="warehouse-rl">
+              Multi-agent Warehouse RL
+            </h3>
+            <p>
+              Central-critic PPO with a shared actor for pickup-dropoff tasks,
+              curriculum instances, and reward shaping.
+            </p>
+            <p>
+              <kbd>Python</kbd> <kbd>PyTorch</kbd> <kbd>PPO</kbd>
+              <kbd>Multi-agent</kbd>
+            </p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/Multiagent-warehouse-path-planning.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- RBuilder -->
+          <article
+            class="card project"
+            data-tags="frontend react typescript ui hackathon web"
+          >
+            <h3 style="margin-top: 0" id="rbuilder">RBuilder</h3>
+            <p>
+              Drag-and-drop resume builder built in 24 hours by a team of two.
+              Component presets and export.
+            </p>
+            <p><kbd>React</kbd> <kbd>TypeScript</kbd> <kbd>Vite</kbd></p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/rBuild.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- Spotify shared queue -->
+          <article
+            class="card project"
+            data-tags="frontend backend realtime sockets spotify node express typescript react vite socket.io discord music"
+          >
+            <h3 style="margin-top: 0" id="spotify-queue">
+              Spotify Shared Queue Listener
+            </h3>
+            <p>
+              Listen-along controller for Discord groups with a shared queue and
+              synced playback.
+            </p>
+            <p>
+              <kbd>React</kbd> <kbd>Vite</kbd> <kbd>TypeScript</kbd>
+              <kbd>Socket.IO</kbd> <kbd>Node</kbd> <kbd>Express</kbd>
+              <kbd>Spotify Web API</kbd>
+            </p>
+            <p class="cta" style="margin-top: 12px">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/Spotify-shared-queue.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- CVWO forum -->
+          <article
+            class="card project"
+            data-tags="frontend backend fullstack forum react mui rails ruby sqlite web"
+          >
+            <h3 style="margin-top: 0" id="cvwo-forum">CVWO Forum Site</h3>
+            <p>Full-stack forum with threads, posts, tags, and auth.</p>
+            <p>
+              <kbd>React</kbd> <kbd>MUI</kbd> <kbd>Rails</kbd> <kbd>Ruby</kbd>
+              <kbd>SQLite</kbd>
+            </p>
+            <p class="cta">
+              <a
+                class="button"
+                href="https://github.com/ThienDuc3112/CVWO_23-24_Frontend.git"
+                target="_blank"
+                >Github</a
+              >
+            </p>
+          </article>
+
+          <!-- Math catcher -->
+          <article
+            class="card project"
+            data-tags="systems verilog fpga hardware"
+          >
+            <h3 style="margin-top: 0" id="math-catcher">
+              Math Catcher (FPGA game)
+            </h3>
+            <p>
+              Verilog-based mini game on an OLED display controled by a FPGA
+              board with animated equations, input handling, and simple scoring.
+            </p>
+            <p><kbd>Verilog</kbd> <kbd>FPGA</kbd> <kbd>hardware</kbd></p>
+            <!-- <p class="cta"> -->
+            <!--   <a class="button" href="#math-catcher">Read more</a> -->
+            <!-- </p> -->
+          </article>
+        </div>
+      </section>
+
+      <script>
+        (function () {
+          var grid = document.getElementById("proj-grid");
+          var cards = Array.from(grid.querySelectorAll(".project"));
+          var buttons = Array.from(document.querySelectorAll("[data-filter]"));
+          var search = document.getElementById("proj-search");
+
+          const updateVisibility = () => {
+            var activeBtn = buttons.find(function (b) {
+              return b.getAttribute("aria-pressed") === "true";
+            });
+            var tag = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
+            var q = (search.value || "").trim().toLowerCase();
+
+            cards.forEach(function (card) {
+              var tags = (card.getAttribute("data-tags") || "").toLowerCase();
+              var text = (card.textContent || "").toLowerCase();
+              var tagOk = tag === "all" || tags.split(/\s+/).includes(tag);
+              var qOk = !q || text.includes(q);
+              card.style.display = tagOk && qOk ? "" : "none";
+            });
+          };
+
+          let firstRun = true;
+          const applyFilters = () => {
+            if (firstRun) {
+              firstRun = false;
+              return updateVisibility();
+            }
+
+            grid.classList.add("anim-out");
+
+            const onOutEnd = (e) => {
+              if (e.target !== grid) return;
+              grid.removeEventListener("transitionend", onOutEnd);
+
+              updateVisibility();
+
+              grid.classList.add("anim-in");
+
+              void grid.getBoundingClientRect();
+
+              grid.classList.remove("anim-out");
+
+              requestAnimationFrame(() => {
+                const onInEnd = (ev) => {
+                  if (ev.target !== grid) return;
+                  grid.removeEventListener("transitionend", onInEnd);
+                };
+                grid.addEventListener("transitionend", onInEnd);
+                grid.classList.remove("anim-in");
+              });
+            };
+
+            grid.addEventListener("transitionend", onOutEnd);
+          };
+
+          buttons.forEach(function (btn) {
+            btn.addEventListener("click", () => {
+              buttons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+              btn.setAttribute("aria-pressed", "true");
+              applyFilters();
+            });
+          });
+
+          search.addEventListener("input", applyFilters);
+          applyFilters();
+        })();
+      </script>
     </main>
 
     <footer class="footer container">
